@@ -38,7 +38,7 @@ This section provides a summary of the development process for each day of the h
 - Defined the project scope and niche (Furniture Marketplace).
 - Identified business goals, target audience, and differentiators.
 - Designed the data schema for core entities: Products, Orders, Customers, and Delivery Zones.
-- [Detailed Day 1 Progress](./day1_marketplace_progress.md)
+- [Detailed Day 1 Progress](https://github.com/RehanTechForge/Marketplace-Builder-Hackathon-2025/tree/main/Day01)
 
 ---
 
@@ -63,7 +63,7 @@ This section provides a summary of the development process for each day of the h
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/nextjs-design-jam-marketplace.git
+   git clone https://github.com/RehanTechForge/Marketplace-Builder-Hackathon-2025
    ```
 2. Navigate to the project directory:
    ```bash
