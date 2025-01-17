@@ -1,180 +1,84 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-// export const productType = defineType({
-//   name: "product",
-//   title: "Product",
-//   type: "document",
-//   icon: DocumentTextIcon,
-//   fields: [
-//     defineField({
-//       name: "name",
-//       type: "string",
-//     }),
-//     defineField({
-//       name: "slug",
-//       type: "slug",
-//       options: {
-//         source: "title",
-//       },
-//     }),
-//     defineField({
-//       name: "mainImage",
-//       type: "image",
-//       options: {
-//         hotspot: true,
-//       },
-//       fields: [
-//         {
-//           name: "alt",
-//           type: "string",
-//           title: "Alternative text",
-//         },
-//       ],
-//     }),
-//     defineField({
-//       name: "categories",
-//       type: "array",
-//       of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
-//     }),
-//     defineField({
-//       name: "description",
-//       type: "text",
-//       title: "Description",
-//     }),
-//     defineField({
-//       name: "price",
-//       type: "number",
-//       title: "Price",
-//     }),
-//     defineField({
-//       name: "dimensions",
-//       type: "object",
-//       fields: [
-//         { name: "width", type: "number" },
-//         { name: "height", type: "number" },
-//       ],
-//     }),
-//     defineField({
-//       name: "weight",
-//       type: "number",
-//       title: "Weight",
-//     }),
-//     defineField({
-//       name: "stock",
-//       type: "number",
-//       title: "Stock",
-//     }),
-
-//     defineField({
-//       name: "publishedAt",
-//       type: "datetime",
-//     }),
-//   ],
-//   preview: {
-//     select: {
-//       title: "name",
-//       media: "mainImage",
-//     },
-//     prepare(selection) {
-//       const { title, media } = selection;
-//       return {
-//         title: title,
-//         subtitle: `Published at: ${new Date(media?.asset?.updatedAt).toLocaleDateString()}`,
-//       };
-//     },
-//   },
-// });
-
 export const productType = defineType({
   name: "product",
   title: "Product",
   type: "document",
-  icon: DocumentTextIcon,
   fields: [
     defineField({
-      name: "name",
-      title: "Name",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "name",
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "mainImage",
-      title: "Main Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      fields: [
+      name: "category",
+      title: "Category",
+      type: "reference",
+      to: [
         {
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
+          type: "category",
         },
       ],
     }),
     defineField({
-      name: "categories",
-      title: "Categories",
-      type: "array",
-      of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
+      name: "name",
+      title: "Title",
+      validation: (rule) => rule.required(),
+      type: "string",
     }),
     defineField({
-      name: "description",
-      type: "text",
-      title: "Description",
+      name: "slug",
+      title: "Slug",
+      validation: (rule) => rule.required(),
+      type: "slug",
+    }),
+    defineField({
+      name: "image",
+      type: "image",
+      validation: (rule) => rule.required(),
+      title: "Product Image",
     }),
     defineField({
       name: "price",
       type: "number",
+      validation: (rule) => rule.required(),
       title: "Price",
-      validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
-      name: "dimensions",
-      type: "object",
-      fields: [
-        { name: "width", type: "number", title: "Width" },
-        { name: "height", type: "number", title: "Height" },
+      name: "quantity",
+      title: "Quantity",
+      type: "number",
+      validation: (rule) => rule.min(0),
+    }),
+    defineField({
+      name: "tags",
+      type: "array",
+      title: "Tags",
+      of: [
+        {
+          type: "string",
+        },
       ],
     }),
     defineField({
-      name: "weight",
-      type: "number",
-      title: "Weight",
+      name: "description",
+      title: "Description",
+      type: "text",
+      description: "Detailed description of the product",
     }),
     defineField({
-      name: "stock",
-      type: "number",
-      title: "Stock",
-      validation: (Rule) => Rule.required().min(0),
+      name: "features",
+      title: "Features",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "List of key features of the product",
     }),
     defineField({
-      name: "publishedAt",
-      type: "datetime",
-      title: "Published At",
+      name: "dimensions",
+      title: "Dimensions",
+      type: "object",
+      fields: [
+        { name: "height", title: "Height", type: "string" },
+        { name: "width", title: "Width", type: "string" },
+        { name: "depth", title: "Depth", type: "string" },
+      ],
+      description: "Dimensions of the product",
     }),
   ],
-  preview: {
-    select: {
-      title: "name",
-      media: "mainImage",
-    },
-    prepare(selection) {
-      const { title, media } = selection;
-      return {
-        title: title,
-        subtitle: `Published at: ${new Date(media?.asset?.updatedAt).toLocaleDateString()}`,
-      };
-    },
-  },
 });

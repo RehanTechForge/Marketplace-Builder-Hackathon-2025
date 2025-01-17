@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { Category } from "@/lib/types";
 
 interface FilterSection {
   title: string;
@@ -12,36 +13,13 @@ interface FilterSection {
   }[];
 }
 
-const filterSections: FilterSection[] = [
-  {
-    title: "Product type",
-    options: [
-      { label: "Furniture", value: "furniture" },
-      { label: "Homeware", value: "homeware", selected: true },
-      { label: "Sofas", value: "sofas" },
-      { label: "Homeware", value: "homeware2" },
-      { label: "Light fittings", value: "light-fittings" },
-      { label: "Accessories", value: "accessories" },
-    ],
-  },
-  {
-    title: "Price",
-    options: [
-      { label: "0 - 100", value: "0-100" },
-      { label: "101 - 250", value: "101-250" },
-      { label: "250 +", value: "250-plus" },
-    ],
-  },
-  {
-    title: "Designer",
-    options: [
-      { label: "Robert Smith", value: "robert-smith" },
-      { label: "Liam Gallagher", value: "liam-gallagher" },
-      { label: "Biggie Smalls", value: "biggie-smalls" },
-      { label: "Thom Yorke", value: "thom-yorke" },
-    ],
-  },
-];
+interface ProductFiltersProps {
+  selectedFilters: Set<string>;
+  setSelectedFilters: React.Dispatch<React.SetStateAction<Set<string>>>;
+  selectedSort: string;
+  setSelectedSort: React.Dispatch<React.SetStateAction<string>>;
+  categories: Category[];
+}
 
 const sortOptions = [
   { label: "Newest", value: "newest" },
@@ -49,19 +27,15 @@ const sortOptions = [
   { label: "Price: High to Low", value: "price-desc" },
 ];
 
-export default function ProductFilters() {
-  const [selectedFilters, setSelectedFilters] = useState<Set<string>>(
-    new Set(
-      filterSections.flatMap((section) =>
-        section.options
-          .filter((option) => option.selected)
-          .map((option) => option.value)
-      )
-    )
-  );
+export default function ProductFilters({
+  selectedFilters,
+  setSelectedFilters,
+  selectedSort,
+  setSelectedSort,
+  categories,
+}: ProductFiltersProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [selectedSort, setSelectedSort] = useState(sortOptions[0].value);
 
   const toggleFilter = (value: string) => {
     setSelectedFilters((prev) => {
@@ -74,6 +48,32 @@ export default function ProductFilters() {
       return next;
     });
   };
+
+  const filterSections: FilterSection[] = [
+    {
+      title: "Category",
+      options: categories.map((category) => ({
+        label: category.name,
+        value: category._id,
+      })),
+    },
+    {
+      title: "Price",
+      options: [
+        { label: "$0 - $500", value: "0-500" },
+        { label: "$501 - $1000", value: "501-1000" },
+        { label: "$1000+", value: "1000+" },
+      ],
+    },
+    {
+      title: "Tags",
+      options: [
+        { label: "Popular Products", value: "popular products" },
+        { label: "New Arrivals", value: "new arrivals" },
+        { label: "Best Sellers", value: "best sellers" },
+      ],
+    },
+  ];
 
   return (
     <>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SanityLive } from "@/sanity/lib/live";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -42,6 +43,7 @@ export default function RootLayout({
         className={`${satoshi.variable} ${clashDisplay.variable} antialiased`}
       >
         {children}
+        <SanityLive />
       </body>
     </html>
   );
