@@ -40,6 +40,12 @@ This section provides a summary of the development process for each day of the h
 - Designed the data schema for core entities: Products, Orders, Customers, and Delivery Zones.
 - [Detailed Day 1 Progress](https://github.com/RehanTechForge/Marketplace-Builder-Hackathon-2025/tree/main/Day01)
 
+### **Day 2: System Design and Integration**
+
+- Designed the system architecture to connect the frontend and backend seamlessly.
+- Defined API routes for product fetching, order creation, and payment verification.
+- Integrated third-party APIs for secure payments and product data.
+- [Detailed Day 2 Progress](https://github.com/RehanTechForge/Marketplace-Builder-Hackathon-2025/tree/main/Day02)
 ---
 
 ## 🛠️ Tech Stack
@@ -68,6 +74,7 @@ This section provides a summary of the development process for each day of the h
 2. Navigate to the project directory:
    ```bash
    cd Marketplace Builder Hackathon 2025
+   cd choose the Day Directory for eg: `Day01`,`Day02`...`Day07`
    ```
 3. Install dependencies:
    ```bash
