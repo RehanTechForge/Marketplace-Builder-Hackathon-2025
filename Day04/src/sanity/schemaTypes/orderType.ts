@@ -1,146 +1,53 @@
-import { DocumentTextIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
-
-// export const orderType = defineType({
-//   name: "order",
-//   title: "Order",
-//   type: "document",
-//   icon: DocumentTextIcon,
-//   fields: [
-//     defineField({
-//       name: "customerId",
-//       title: "Customer",
-//       type: "reference",
-//       to: [{ type: "customer" }], // Ensure "customer" is a valid document type
-//     }),
-//     defineField({
-//       name: "orderDate",
-//       title: "Order Date",
-//       type: "datetime",
-//     }),
-//     defineField({
-//       name: "orderStatus",
-//       title: "Order Status",
-//       type: "string",
-//       options: {
-//         list: [
-//           { title: "Pending", value: "pending" },
-//           { title: "Shipped", value: "shipped" },
-//           { title: "Delivered", value: "delivered" },
-//           { title: "Cancelled", value: "cancelled" },
-//         ],
-//       },
-//     }),
-//     defineField({
-//       name: "shippingAddress",
-//       title: "Shipping Address",
-//       type: "object",
-//       fields: [
-//         { name: "street", title: "Street", type: "string" },
-//         { name: "city", title: "City", type: "string" },
-//         { name: "state", title: "State", type: "string" },
-//         { name: "postalCode", title: "Postal Code", type: "string" },
-//       ],
-//     }),
-//     defineField({
-//       name: "totalAmount",
-//       title: "Total Amount",
-//       type: "number",
-//     }),
-//     defineField({
-//       name: "paymentMethod",
-//       title: "Payment Method",
-//       type: "string",
-//       options: {
-//         list: [
-//           { title: "Credit Card", value: "creditCard" },
-//           { title: "Cash On Delivery", value: "cashOnDelivery" },
-//         ],
-//       },
-//     }),
-//     defineField({
-//       name: "paymentStatus",
-//       title: "Payment Status",
-//       type: "string",
-//       options: {
-//         list: [
-//           { title: "Pending", value: "pending" },
-//           { title: "Paid", value: "paid" },
-//           { title: "Refunded", value: "refunded" },
-//           { title: "Failed", value: "failed" },
-//         ],
-//       },
-//     }),
-//     defineField({
-//       name: "orderItems",
-//       title: "Order Items",
-//       type: "array",
-//       of: [{ type: "reference", to: [{ type: "orderItem" }] }],
-//     }),
-//   ],
-//   preview: {
-//     select: {
-//       customerId: "customerId",
-//       orderDate: "orderDate",
-//       orderStatus: "orderStatus",
-//       totalAmount: "totalAmount",
-//       paymentMethod: "paymentMethod",
-//     },
-//     prepare(selection) {
-//       const { customerId, orderDate, orderStatus, totalAmount, paymentMethod } =
-//         selection;
-//       return {
-//         title: `Order #${customerId ? customerId.substr(-4) : "N/A"}`,
-//         subtitle: `${orderDate || "No Date"} - ${
-//           orderStatus || "No Status"
-//         } - $${totalAmount || "0"} - ${paymentMethod || "No Payment Method"}`,
-//       };
-//     },
-//   },
-// });
+import { defineType, defineField } from "sanity";
 
 export const orderType = defineType({
   name: "order",
   title: "Order",
   type: "document",
-  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "customerId",
-      title: "Customer",
-      type: "reference",
-      to: [{ type: "customer" }],
-      validation: (Rule) => Rule.required(),
+      title: "Customer ID",
+      type: "string",
     }),
     defineField({
       name: "orderDate",
       title: "Order Date",
       type: "datetime",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "orderStatus",
       title: "Order Status",
       type: "string",
       options: {
-        list: [
-          { title: "Pending", value: "pending" },
-          { title: "Shipped", value: "shipped" },
-          { title: "Delivered", value: "delivered" },
-          { title: "Cancelled", value: "cancelled" },
-        ],
+        list: ["pending", "shipped", "delivered", "canceled"],
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "shippingAddress",
       title: "Shipping Address",
       type: "object",
       fields: [
-        { name: "street", title: "Street", type: "string" },
-        { name: "city", title: "City", type: "string" },
-        { name: "state", title: "State", type: "string" },
-        { name: "postalCode", title: "Postal Code", type: "string" },
+        defineField({
+          name: "street",
+          title: "Street",
+          type: "string",
+        }),
+        defineField({
+          name: "city",
+          title: "City",
+          type: "string",
+        }),
+        defineField({
+          name: "state",
+          title: "State",
+          type: "string",
+        }),
+        defineField({
+          name: "postalCode",
+          title: "Postal Code",
+          type: "string",
+        }),
       ],
     }),
     defineField({
@@ -151,16 +58,32 @@ export const orderType = defineType({
         {
           type: "object",
           fields: [
-            { name: "productId", type: "reference", to: [{ type: "product" }] },
-            { name: "productName", type: "string" },
-            { name: "quantity", type: "number" },
-            { name: "price", type: "number" },
-            {
-              name: "subtotal",
+            defineField({
+              name: "productId",
+              title: "Product ID",
+              type: "reference",
+              to: [{ type: "product" }],
+            }),
+            defineField({
+              name: "productName",
+              title: "Product Name",
+              type: "string",
+            }),
+            defineField({
+              name: "quantity",
+              title: "Quantity",
               type: "number",
-              readOnly: true,
-              description: "This field is automatically calculated",
-            },
+            }),
+            defineField({
+              name: "price",
+              title: "Price",
+              type: "number",
+            }),
+            defineField({
+              name: "subtotal",
+              title: "Subtotal",
+              type: "number",
+            }),
           ],
         },
       ],
@@ -169,19 +92,13 @@ export const orderType = defineType({
       name: "totalAmount",
       title: "Total Amount",
       type: "number",
-      readOnly: true,
-      description:
-        "This field is automatically calculated based on order items",
     }),
     defineField({
       name: "paymentMethod",
       title: "Payment Method",
       type: "string",
       options: {
-        list: [
-          { title: "Credit Card", value: "creditCard" },
-          { title: "Cash On Delivery", value: "cashOnDelivery" },
-        ],
+        list: ["cashOnDelivery", "creditCard", "debitCard", "paypal"],
       },
     }),
     defineField({
@@ -189,32 +106,135 @@ export const orderType = defineType({
       title: "Payment Status",
       type: "string",
       options: {
-        list: [
-          { title: "Pending", value: "pending" },
-          { title: "Paid", value: "paid" },
-          { title: "Refunded", value: "refunded" },
-          { title: "Failed", value: "failed" },
-        ],
+        list: ["pending", "paid", "failed"],
+      },
+    }),
+    defineField({
+      name: "trackingId",
+      title: "Tracking ID",
+      type: "string",
+    }),
+    defineField({
+      name: "trackingStatus",
+      title: "Tracking Status",
+      type: "string",
+      options: {
+        list: ["pending", "shipped", "inTransit", "delivered"],
+      },
+    }),
+    defineField({
+      name: "shipDate",
+      title: "Ship Date",
+      type: "datetime",
+    }),
+    defineField({
+      name: "shipFrom",
+      title: "Ship From",
+      type: "object",
+      fields: [
+        defineField({
+          name: "name",
+          title: "Name",
+          type: "string",
+        }),
+        defineField({
+          name: "address",
+          title: "Address",
+          type: "string",
+        }),
+        defineField({
+          name: "city",
+          title: "City",
+          type: "string",
+        }),
+        defineField({
+          name: "state",
+          title: "State",
+          type: "string",
+        }),
+        defineField({
+          name: "postalCode",
+          title: "Postal Code",
+          type: "string",
+        }),
+        defineField({
+          name: "countryCode",
+          title: "Country Code",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "returnTo",
+      title: "Return To",
+      type: "object",
+      fields: [
+        defineField({
+          name: "name",
+          title: "Name",
+          type: "string",
+        }),
+        defineField({
+          name: "address",
+          title: "Address",
+          type: "string",
+        }),
+        defineField({
+          name: "city",
+          title: "City",
+          type: "string",
+        }),
+        defineField({
+          name: "state",
+          title: "State",
+          type: "string",
+        }),
+        defineField({
+          name: "postalCode",
+          title: "Postal Code",
+          type: "string",
+        }),
+        defineField({
+          name: "countryCode",
+          title: "Country Code",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "totalWeight",
+      title: "Total Weight",
+      type: "number",
+    }),
+    defineField({
+      name: "labelMessages",
+      title: "Label Messages",
+      type: "object",
+      fields: [
+        defineField({
+          name: "reference1",
+          title: "Reference 1",
+          type: "string",
+        }),
+        defineField({
+          name: "reference2",
+          title: "Reference 2",
+          type: "string",
+        }),
+        defineField({
+          name: "reference3",
+          title: "Reference 3",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "insuranceProvider",
+      title: "Insurance Provider",
+      type: "string",
+      options: {
+        list: ["none", "thirdParty", "selfInsured"],
       },
     }),
   ],
-  preview: {
-    select: {
-      customerId: "customerId",
-      orderDate: "orderDate",
-      orderStatus: "orderStatus",
-      totalAmount: "totalAmount",
-      paymentMethod: "paymentMethod",
-    },
-    prepare(selection) {
-      const { customerId, orderDate, orderStatus, totalAmount, paymentMethod } =
-        selection;
-      return {
-        title: `Order #${customerId ? customerId._ref.substr(-4) : "N/A"}`,
-        subtitle: `${orderDate ? new Date(orderDate).toLocaleDateString() : "No Date"} - ${
-          orderStatus || "No Status"
-        } - $${totalAmount || "0"} - ${paymentMethod || "No Payment Method"}`,
-      };
-    },
-  },
 });

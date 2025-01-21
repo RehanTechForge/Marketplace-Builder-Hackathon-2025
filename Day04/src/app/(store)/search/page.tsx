@@ -4,20 +4,22 @@ import Card from "@/components/cards/Card";
 import { Product } from "@/lib/types";
 import { Search, PackageSearch } from "lucide-react";
 
-type SearchParams = { [key: string]: string | string[] | undefined };
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: SearchParams;
 }) {
-  const query = searchParams.query;
+  // @ts-expect-error  // because search params are undefined
+  const query = await searchParams.query;
   return {
     title: query ? `Search results for "${query}"` : "Search Products",
   };
 }
 
 const SearchPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+  // @ts-expect-error  // because search params are undefined
   const query = searchParams.query as string | undefined;
   const products: Product[] = query ? await flexibleSearch(query) : [];
 

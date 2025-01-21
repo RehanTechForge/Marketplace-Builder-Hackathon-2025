@@ -160,7 +160,7 @@ export default function ShoppingCart() {
           <p className="text-primary font-satoshi text-satoshi-14">
             Taxes and shipping are calculated at checkout
           </p>
-          <ButtonMediumDark text="Go to checkout" href="/" />
+          <ButtonMediumDark text="Go to checkout" href="/checkout" />
         </div>
       </div>
     </div>

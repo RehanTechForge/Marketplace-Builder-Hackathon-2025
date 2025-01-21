@@ -22,6 +22,7 @@ import Form from "next/form";
 import { Input } from "../ui/input";
 import { SearchDropdown } from "../search/SearchDropdown";
 import CartIcon from "../cart/CartIcon";
+import User from "./User";
 const items = [
   { label: "Home", link: "/" },
   { label: "About", link: "/about" },
@@ -58,7 +59,7 @@ const TopHeader = () => {
       <div className="capitalize font-clash text-clash-24">
         <Link href="/">avion</Link>
       </div>
-      <div className="hidden md:flex gap-4">
+      <div className="hidden md:flex gap-4 justify-center items-center">
         <Link href={"/wish-list"}>
           <Heart className="w-[24px] h-[24px]" />
         </Link>
@@ -69,25 +70,43 @@ const TopHeader = () => {
             <CartIcon />
           </Link>
         </div>
-        <CircleUser className="w-[24px] h-[24px]" />
+        <User />
       </div>
-      <div className="flex gap-4 md:hidden">
-        <Search className="w-[16px] h-[16px]" />
+      <div className="flex items-center gap-4 md:hidden">
+        {/* Search Icon */}
+        <SearchDropdown />
+
+        {/* Menu and Sheet */}
         <Sheet>
           <SheetTrigger>
-            <Menu className="w-[16px] h-[16px]" />
+            <Menu className="w-5 h-5 cursor-pointer" />
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
               <SheetDescription>
-                <nav>
-                  {/* Use the NavItems component */}
-                  <NavItems
-                    items={items}
-                    className="flex flex-col md:hidden space-y-4"
-                  />
+                <nav className="mt-4">
+                  {/* Navigation Items */}
+                  <NavItems items={items} className="flex flex-col space-y-4" />
                 </nav>
+                <div className="mt-6 flex items-center justify-between">
+                  {/* Wish List */}
+                  <Link href="/wish-list" className="flex items-center gap-2">
+                    <Heart className="w-6 h-6 text-red-500" />
+                    <span>Wish List</span>
+                  </Link>
+                  {/* Cart */}
+                  <div className="relative flex items-center">
+                    <Link href="/cart" className="flex items-center gap-2">
+                      <ShoppingCart className="w-6 h-6" />
+                      <CartIcon />
+                    </Link>
+                  </div>
+                </div>
+                {/* User */}
+                <div className="mt-6">
+                  <User />
+                </div>
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

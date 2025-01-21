@@ -8,12 +8,10 @@ import { getPopularProducts } from "@/sanity/products/getPopularProducts";
 import { Product } from "@/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 import ShortDetail from "../global/ShortDetail";
+import WishListToggle from "../wishList/WishListIcon";
 
 const PopularProducts = async () => {
   const popularProducts = await getPopularProducts();
-
-  console.log(popularProducts.length);
-
   if (popularProducts.length === 0) {
     return null; // Or you could return a message saying no popular products found
   }
@@ -35,7 +33,7 @@ const PopularProducts = async () => {
             />
           </Link>
           <ShortDetail product={mainProduct} />
-
+          <WishListToggle product={mainProduct} />
           <div className="flex flex-col gap-2 mt-4 text-center">
             <Link href={`/shop/${mainProduct.slug.current}`}>
               <span className="font-clash text-clash-20">
