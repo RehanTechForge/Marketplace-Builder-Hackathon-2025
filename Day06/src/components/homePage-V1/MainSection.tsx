@@ -30,7 +30,6 @@ const MainSection = () => {
             height={584}
             width={520}
             className="object-cover h-full w-full"
-            priority // Ensures this image is loaded first, improving LCP
           />
         </div>
       </section>
