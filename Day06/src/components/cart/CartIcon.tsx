@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import ShoppingCart from "./ShopingCart";
-import Link from "next/link";
 import { useCartStore } from "@/lib/store";
 
 const CartIcon = () => {

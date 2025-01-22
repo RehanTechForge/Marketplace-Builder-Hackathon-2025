@@ -10,16 +10,7 @@ import {
 import React from "react";
 import NavItems from "./NavItems"; // Import the NavItems component
 import Link from "next/link";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import Form from "next/form";
-import { Input } from "../ui/input";
+
 import { SearchDropdown } from "../search/SearchDropdown";
 import CartIcon from "../cart/CartIcon";
 import User from "./User";
@@ -27,33 +18,12 @@ const items = [
   { label: "Home", link: "/" },
   { label: "About", link: "/about" },
   { label: "Shop", link: "/shop" },
-  // { label: "Home V1", link: "/" },
-  // { label: "Home V2", link: "/home-v1" },
-  // { label: "About V1", link: "/about" },
-  // { label: "About V2", link: "/about-v2" },
-  // { label: "Cart V2", link: "/cart-v2" },
-  // { label: "Shop V1", link: "/shop" },
-  // { label: "Shop V2", link: "/shop-v2" },
-  // { label: "Shop V3", link: "/shop-v3" },
 ];
 
 const TopHeader = () => {
   return (
     <div className="border-b-none sm:border-b border-[#e5e5e5] flex justify-between items-center py-2">
       <div className="hidden md:block">
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Search className="w-[16px] h-[16px]" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Search Here...</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <Form action="/search">
-              <Input name="query" />
-              <button type="submit">Search</button>
-            </Form>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
         <SearchDropdown />
       </div>
       <div className="capitalize font-clash text-clash-24">
