@@ -1,9 +1,9 @@
-import { ButtonMediumDark } from "@/components/buttons/buttons";
+
 import AddToCartAndQuantity from "@/components/cart/AddToCartAndQuantity";
 import FeaturesSection from "@/components/homePage-V1/FeaturesSection";
 import WishList from "@/components/homePage-V1/WishList";
 import ListingProducts from "@/components/shopDetailPage/ListingProducts";
-import { CartItem } from "@/lib/store";
+
 import { Product } from "@/lib/types";
 import { urlFor } from "@/sanity/lib/image";
 import { getProductBySlug } from "@/sanity/products/getProductBySlug";

@@ -26,6 +26,7 @@ const BuyNow = ({ product }: { product: Product }) => {
       className="bg-darkPrimary text-white w-[150px] font-satoshi text-satoshi-16 my-6 inline-block text-center capitalize disabled:bg-primary disabled:cursor-not-allowed mr-24 px-4 rounded-sm py-2 "
       onClick={handleBuyNowClick}
       disabled={product.quantity === 0 || product.quantity <= 0}
+      aria-label="handle buy now"
     >
       Buy Now
     </button>

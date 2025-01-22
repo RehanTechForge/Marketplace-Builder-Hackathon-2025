@@ -1,4 +1,4 @@
-import { CircleUser, Heart, Menu, Search, ShoppingCart } from "lucide-react";
+import {  Heart, Menu,  ShoppingCart } from "lucide-react";
 import {
   Sheet,
   SheetContent,

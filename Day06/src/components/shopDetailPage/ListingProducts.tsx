@@ -3,28 +3,7 @@ import ListingWrapper from "../layout/ListingWrapper";
 import Card from "../cards/Card";
 import { ButtonMedium } from "../buttons/buttons";
 import { Product } from "@/lib/types";
-const cardData = [
-  {
-    image: "/cards/c1.png",
-    title: "The Dandy Chair",
-    price: "£250",
-  },
-  {
-    image: "/cards/c2.png",
-    title: "The Elegant Sofa",
-    price: "£500",
-  },
-  {
-    image: "/cards/c3.png",
-    title: "The Cozy Armchair",
-    price: "£300",
-  },
-  {
-    image: "/cards/c4.png",
-    title: "The Luxurious Bed",
-    price: "£800",
-  },
-];
+
 const ListingProducts = ({
   relatedProducts,
 }: {

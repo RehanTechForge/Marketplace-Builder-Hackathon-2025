@@ -24,7 +24,7 @@ export default async function OrderPage() {
 
   const orders = await getOrdersByCustomerId(user?.id);
 
-  console.log("Front", orders);
+  // console.log("Front", orders);
 
   if (orders?.length === 0 || orders === null) {
     return (

@@ -2,7 +2,6 @@ import React from "react";
 import ListingWrapper from "../layout/ListingWrapper";
 import Card from "../cards/Card";
 import { ButtonMedium } from "../buttons/buttons";
-import { getAllProducts } from "@/sanity/products/getAllProducts";
 import { getHomePageProducts } from "@/sanity/products/getHomePageProducts";
 import { Product } from "@/lib/types";
 

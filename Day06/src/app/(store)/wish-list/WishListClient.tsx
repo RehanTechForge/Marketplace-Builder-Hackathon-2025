@@ -40,23 +40,6 @@ export default function WishListClient({ products }: WishListClientProps) {
     return null;
   }
 
-  // if (wishlistItems.length === 0) {
-  //   return (
-  //     <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
-  //       <Package className="h-16 w-16 text-muted-foreground mb-4" />
-  //       <h1 className="text-2xl font-bold text-center mb-2">
-  //         Your wishlist is empty
-  //       </h1>
-  //       <p className="text-muted-foreground text-center mb-6">
-  //         Items added to your wishlist will appear here
-  //       </p>
-  //       <Button variant="outline" size="lg">
-  //         <Link href={"/shop"}>Continue Shopping</Link>
-  //       </Button>
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       {wishlistItems.length === 0 ? (

@@ -5,7 +5,6 @@ import ProductFilters from "./ProductFilter";
 import Card from "../cards/Card";
 import { Product, Category } from "@/lib/types";
 import Pagination from "./Pagination";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 

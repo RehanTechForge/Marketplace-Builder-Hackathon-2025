@@ -76,6 +76,7 @@ const AddToCartAndQuantity = ({ product }: { product: Product }) => {
             <button
               className={`bg-darkPrimary text-white font-satoshi text-satoshi-16 px-[32px] py-[16px] my-6 inline-block text-center w-full sm:w-max capitalize ${isCart ? "hidden" : "visible"}`}
               onClick={handleAddToCart}
+              aria-label="handleAddToCart"
             >
               Add to cart
             </button>
@@ -89,6 +90,7 @@ const AddToCartAndQuantity = ({ product }: { product: Product }) => {
           <button
             className="w-full px-8 py-3 bg-gray-300 text-gray-600 cursor-not-allowed font-satoshi"
             disabled
+            aria-label="handleOutOfStock"
           >
             Out of Stock
           </button>

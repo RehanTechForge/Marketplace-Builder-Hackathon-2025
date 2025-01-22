@@ -1,4 +1,4 @@
-import { CircleUser, Package, User2Icon } from "lucide-react";
+import {  Package, User2Icon } from "lucide-react";
 import React from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
