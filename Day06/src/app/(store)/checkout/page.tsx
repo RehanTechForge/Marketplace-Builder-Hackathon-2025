@@ -189,24 +189,6 @@ export default function CheckoutPage() {
       if (!response.ok) {
         throw new Error(result.error || "Failed to create order");
       }
-      //       {
-      //     "success": true,
-      //     "message": "Order created successfully",
-      //     "orderDetails": {
-      //         "orderId": "KRSbGMnZ3dPHMLFCzdfrvJ",
-      //         "trackingId": "se-44714084",
-      //         "orderStatus": "pending",
-      //         "shippingDetails": {
-      //             "address": {
-      //                 "street": "123132dasda",
-      //                 "city": "dsadsa",
-      //                 "state": "FL",
-      //                 "postalCode": "12345"
-      //             },
-      //             "shipDate": "2025-01-20T00:00:00Z"
-      //         }
-      //     }
-      // }
       console.log("Order created", result);
 
       if (result.success) {
@@ -535,7 +517,7 @@ export default function CheckoutPage() {
                 <span>
                   {item.name} x {item.cartQuantity}
                 </span>
-                <span>₹{(item.price * item.cartQuantity).toFixed(2)}</span>
+                <span>${(item.price * item.cartQuantity).toFixed(2)}</span>
               </div>
             ))}
             <div className="border-t pt-2 mt-4">

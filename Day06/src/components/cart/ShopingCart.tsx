@@ -154,7 +154,7 @@ export default function ShoppingCart() {
               Subtotal
             </span>
             <span className="text-clash-24 font-clash">
-              £{subtotal.toFixed(2)}
+              ${subtotal.toFixed(2)}
             </span>
           </div>
           <p className="text-primary font-satoshi text-satoshi-14">
