@@ -93,6 +93,7 @@ export function SearchDropdown() {
                     );
                     setIsOpen(false);
                   }}
+                  aria-label={`Search for ${product.name} priced at $${product.price.toFixed(2)}`}
                 >
                   <span className="font-medium">{product.name}</span>
                   <span className="ml-2 text-sm text-gray-500">

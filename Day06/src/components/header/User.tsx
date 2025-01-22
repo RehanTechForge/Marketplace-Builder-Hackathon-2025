@@ -32,7 +32,9 @@ const User = () => {
               <DropdownMenuItem>
                 <div className="flex gap-4">
                   <Package className="w-[24px] h-[24px]" />
-                  <Link href={"/orders"}>My Orders</Link>
+                  <Link href={"/orders"} aria-label="go to order page">
+                    My Orders
+                  </Link>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuContent>

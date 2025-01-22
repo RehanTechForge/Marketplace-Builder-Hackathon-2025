@@ -30,18 +30,24 @@ const TopHeader = () => {
         <Link href="/">avion</Link>
       </div>
       <div className="hidden md:flex gap-4 justify-center items-center">
-        <Link href={"/wish-list"}>
-          <Heart className="w-[24px] h-[24px]" />
+        {/* Wishlist Icon */}
+        <Link href="/wish-list" aria-label="Go to Wish List">
+          <Heart className="w-[24px] h-[24px]" aria-hidden="true" />
         </Link>
-        {/* <CartIcon /> */}
+
+        {/* Cart Icon */}
         <div className="relative">
-          <Link href={"/cart"}>
-            <ShoppingCart className="w-[24px] h-[24px]" />
-            <CartIcon />
+          <Link href="/cart" aria-label="Go to Cart">
+            <ShoppingCart className="w-[24px] h-[24px]" aria-hidden="true" />
           </Link>
+          <CartIcon />
         </div>
+
+        {/* User Icon */}
+
         <User />
       </div>
+
       <div className="flex items-center gap-4 md:hidden">
         {/* Search Icon */}
         <SearchDropdown />

@@ -1,13 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+
 const Footer = () => {
   return (
     <footer className="bg-darkPrimary text-white pt-12 pb-5 px-4 sm:px-10 lg:px-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
         {/* Menu Section */}
         <div className="col-span-1">
-          <h4 className="font-clash text-clash-16 mb-4">Menu</h4>
+          <h2 className="font-clash text-clash-16 mb-4">Menu</h2>
           <ul className="space-y-2">
             <li className="font-satoshi text-satoshi-16">
               <Link href="/new-arrivals">New arrivals</Link>
@@ -29,7 +30,7 @@ const Footer = () => {
 
         {/* Categories Section */}
         <div className="col-span-1">
-          <h4 className="font-clash text-clash-16 mb-4">Categories</h4>
+          <h2 className="font-clash text-clash-16 mb-4">Categories</h2>
           <ul className="space-y-2">
             <li className="font-satoshi text-satoshi-16">
               <Link href="/crockery">Crockery</Link>
@@ -51,7 +52,7 @@ const Footer = () => {
 
         {/* Our Company Section */}
         <div className="col-span-1">
-          <h4 className="font-clash text-clash-16 mb-4">Our company</h4>
+          <h2 className="font-clash text-clash-16 mb-4">Our Company</h2>
           <ul className="space-y-2">
             <li className="font-satoshi text-satoshi-16">
               <Link href="/about-us">About us</Link>
@@ -73,16 +74,21 @@ const Footer = () => {
 
         {/* Mailing List Section */}
         <div className="col-span-1 md:col-span-2 lg:col-span-3">
-          <h4 className="font-clash text-clash-16 mb-4">
+          <h2 className="font-clash text-clash-16 mb-4">
             Join our mailing list
-          </h4>
-          <div className="flex  sm:flex-row items-start sm:items-center  sm:space-y-0 sm:space-x-2">
+          </h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-y-0 sm:space-x-2">
             <input
               type="email"
               placeholder="your@email.com"
               className="w-full px-4 py-4 bg-[#4a4766] text-white text-satoshi-16 font-satoshi focus:outline-none"
+              aria-label="Email address"
             />
-            <button className="px-8 py-4 bg-white text-[#2A254B] font-satoshi text-satoshi-16 min-w-max">
+            <button
+              className="px-8 py-4 bg-white text-[#2A254B] font-satoshi text-satoshi-16 min-w-max"
+              type="button"
+              aria-label="Sign up"
+            >
               Sign up
             </button>
           </div>
@@ -94,17 +100,17 @@ const Footer = () => {
         <p className="font-satoshi text-base text-center md:text-left">
           Copyright © 2022 Avion LTD
         </p>
-        <div className="hidden md:flex justify-center space-x-4">
-          <Link href="#">
+        <div className="flex justify-center space-x-4">
+          <Link href="#" aria-label="LinkedIn">
             <Linkedin className="text-white hover:text-indigo-400" size={24} />
           </Link>
-          <Link href="#">
+          <Link href="#" aria-label="Facebook">
             <Facebook className="text-white hover:text-indigo-400" size={24} />
           </Link>
-          <Link href="#">
+          <Link href="#" aria-label="Instagram">
             <Instagram className="text-white hover:text-indigo-400" size={24} />
           </Link>
-          <Link href="#">
+          <Link href="#" aria-label="Twitter">
             <Twitter className="text-white hover:text-indigo-400" size={24} />
           </Link>
         </div>

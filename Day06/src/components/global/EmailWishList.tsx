@@ -6,7 +6,7 @@ const EmailWishList = () => {
     <div className="flex flex-col justify-start items-start xs:flex-row xs:justify-center xs:items-center">
       <input
         type="text"
-        className="bg-[#f9f9f9] border border-borderDark text-darkPrimary px-6 font-satoshi text-satoshi-16 opacity-20 md:min-w-[356px] h-[63px] focus-within:outline-none "
+        className="bg-[#f9f9f9] border border-borderDark !text-black px-6 font-satoshi text-satoshi-16 opacity-90 md:min-w-[356px] h-[63px] focus-within:outline-none !placeholder:text-black"
         placeholder="your@email.com"
       />
       <ButtonMediumDark text="Sign up" href="/" />

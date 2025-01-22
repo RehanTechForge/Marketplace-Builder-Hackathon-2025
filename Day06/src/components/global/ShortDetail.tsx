@@ -18,7 +18,10 @@ const ShortDetail = ({ product }: { product: Product }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="absolute z-20 h-10 w-10 rounded-full flex justify-center items-center bg-white right-2 top-2">
+        <button
+          className="absolute z-20 h-10 w-10 rounded-full flex justify-center items-center bg-white right-2 top-2"
+          aria-label="Toggle visibility"
+        >
           <Eye className="h-6 w-6 text-gray-600" />
         </button>
       </DialogTrigger>

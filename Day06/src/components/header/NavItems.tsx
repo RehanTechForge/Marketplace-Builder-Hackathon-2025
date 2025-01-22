@@ -12,7 +12,7 @@ interface NavItemsProps {
 
 const NavItems = ({ items, className }: NavItemsProps) => {
   return (
-    <ul className={className}>
+    <>
       {items.map((item, index) => (
         <li key={index}>
           <Link
@@ -23,7 +23,7 @@ const NavItems = ({ items, className }: NavItemsProps) => {
           </Link>
         </li>
       ))}
-    </ul>
+    </>
   );
 };
 
