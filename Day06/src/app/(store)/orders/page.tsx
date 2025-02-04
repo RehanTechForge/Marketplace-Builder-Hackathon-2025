@@ -24,9 +24,9 @@ export default async function OrderPage() {
 
   const orders = await getOrdersByCustomerId(user?.id);
 
-  // console.log("Front", orders);
+  console.log("Front", orders);
 
-  if (orders?.length === 0 || orders === null) {
+  if (!orders || orders.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
         <svg

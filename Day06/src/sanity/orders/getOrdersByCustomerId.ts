@@ -1,5 +1,4 @@
 import { defineQuery } from "next-sanity";
-import { client } from "../lib/client";
 import { sanityFetch } from "../lib/live";
 
 export async function getOrdersByCustomerId(customerId: string) {
@@ -7,7 +6,7 @@ export async function getOrdersByCustomerId(customerId: string) {
 
   try {
     const ALL_ORDERS_QUERY = defineQuery(
-      `*[_type == "order" && customerId == $customerId][0]`
+      `*[_type == "order" && customerId == $customerId] | order(orderDate desc)`
     );
     const orders = await sanityFetch({
       query: ALL_ORDERS_QUERY,
@@ -18,7 +17,7 @@ export async function getOrdersByCustomerId(customerId: string) {
     console.log("Orders fetched:", orders);
     return orders.data;
   } catch (error) {
-    console.error("Error fetching order from Sanity:", error);
+    console.error("Error fetching orders from Sanity:", error);
     return null;
   }
 }

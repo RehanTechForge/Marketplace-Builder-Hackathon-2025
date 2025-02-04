@@ -192,11 +192,17 @@ export default function CheckoutPage() {
       console.log("Order created", result);
 
       if (result.success) {
-        setTrackingId(result.orderDetails.trackingId);
-        setOrderId(result.orderDetails.orderId);
-        setOrderPlaced(true);
-        clearCart();
-        form.reset();
+        if (values.paymentMethod === "creditCard") {
+          // Redirect to Stripe Checkout
+          window.location.href = result.url;
+        } else {
+          // Handle COD as before
+          setTrackingId(result.orderDetails.trackingId);
+          setOrderId(result.orderDetails.orderId);
+          setOrderPlaced(true);
+          clearCart();
+          form.reset();
+        }
       } else {
         throw new Error(result.error || "Failed to create order");
       }
