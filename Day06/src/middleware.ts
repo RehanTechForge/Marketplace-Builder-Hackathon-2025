@@ -14,6 +14,7 @@ const publicRoutes = [
 ];
 
 export default clerkMiddleware({
+  // @ts-expect-error clerk middleware types issue conflict
   publicRoutes: publicRoutes,
   afterAuth: async (auth: any, req: NextRequest) => {
     console.log("Auth", auth);

@@ -115,7 +115,7 @@ const formSchema = z.object({
   paymentMethod: z.enum(["creditCard", "cashOnDelivery"]),
 });
 
-export default function CheckoutPageClient({ myUser }: CheckoutFormProps) {
+export default function CheckoutPageClient() {
   const { cartItems, totalPrice, clearCart, removeItem } = useCartStore();
   const router = useRouter();
   const { user } = useUser();
