@@ -175,6 +175,7 @@ import { NextResponse } from "next/server";
 import { shipengine } from "@/lib/shipengine";
 import { backendClient } from "@/sanity/lib/backendClient";
 import Stripe from "stripe";
+import { auth } from "@clerk/nextjs/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-01-27.acacia",
@@ -182,6 +183,20 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: Request) {
   try {
+    const { userId, getToken } = await auth();
+    console.log("User", userId, getToken);
+
+    if (!userId) {
+      return NextResponse.json(
+        {
+          error:
+            "Access denied. Please sign in or create an account to continue.",
+          success: false,
+        },
+        { status: 403 }
+      );
+    }
+
     const body = await request.json();
 
     console.log("Body", body);
@@ -223,11 +238,11 @@ export async function POST(request: Request) {
     const shipmentResponse = await shipengine.getRatesWithShipmentDetails({
       rateOptions: {
         carrierIds: [
-          process.env.CARRIER_ID_ONE!,
-          process.env.CARRIER_ID_TWO!,
-          process.env.CARRIER_ID_THREE!,
-          process.env.CARRIER_ID_FOUR!,
-        ],
+          process.env.SHIPENGINE_FIRST_COURIER! || "",
+          process.env.SHIPENGINE_SECOND_COURIER! || "",
+          process.env.SHIPENGINE_THIRD_COURIER! || "",
+          process.env.SHIPENGINE_FOURTH_COURIER! || "",
+        ].filter(Boolean),
       },
       shipment: {
         shipTo: {
@@ -238,7 +253,7 @@ export async function POST(request: Request) {
           stateProvince: body.shippingAddress.state,
           postalCode: body.shippingAddress.postalCode,
           countryCode: "US",
-          addressResidentialIndicator: "yes",
+          addressResidentialIndicator: "no",
         },
         shipFrom: {
           companyName: "Example Corp.",
@@ -269,9 +284,34 @@ export async function POST(request: Request) {
       },
     });
 
+    // console.log(
+    //   "ShipMent Rate",
+    //   shipmentResponse.rateResponse.rates?.[0].rateId
+    // );
+
+    if (!shipmentResponse) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Failed to retrieve shipping rates",
+        },
+        { status: 501 }
+      );
+    }
+
+    const labelDetails = await shipengine.createLabelFromRate({
+      rateId: shipmentResponse.rateResponse.rates?.[0].rateId as string,
+    });
+
+    const trackingInfo = await shipengine.trackUsingLabelId(
+      labelDetails.labelId
+    );
+
+    // console.log("Label Details", trackingInfo);
+
     const orderData = {
       _type: "order",
-      customerId: body.customerId || "customer-id",
+      customerId: userId || "customer-id",
       orderDate: new Date().toISOString(),
       orderStatus: "pending",
       shippingAddress: {
@@ -291,7 +331,7 @@ export async function POST(request: Request) {
       totalAmount: body.totalAmount,
       paymentMethod: body.paymentMethod,
       paymentStatus: "pending",
-      trackingId: shipmentResponse.shipmentId,
+      trackingId: trackingInfo.trackingNumber,
       trackingStatus: shipmentResponse.shipmentStatus,
       shipDate: shipmentResponse.shipDate,
       shipFrom: {
@@ -339,7 +379,7 @@ export async function POST(request: Request) {
         },
       });
 
-      console.log("Sessions completed", session);
+      // console.log("Sessions completed", session);
 
       return NextResponse.json({
         success: true,
@@ -354,7 +394,7 @@ export async function POST(request: Request) {
         message: "Order created successfully",
         orderDetails: {
           orderId: result._id,
-          trackingId: shipmentResponse.shipmentId,
+          trackingId: trackingInfo.trackingNumber,
           orderStatus: shipmentResponse.shipmentStatus,
           shippingDetails: {
             address: {
